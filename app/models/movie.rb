@@ -1,3 +1,4 @@
+require 'pry'
 class Movie < ActiveRecord::Base
   def self.create_with_title(title)
     create(title: title)
@@ -25,5 +26,16 @@ class Movie < ActiveRecord::Base
 
   def self.find_movies_after_2002
     Movie.where('release_date > ?', 2002)
+  end
+
+  def update_with_attributes(**attrs)
+    attrs.each { |key, value| send("#{key}=", value) }
+  end
+
+  def self.update_all_titles(new_title)
+    Movie.all.each do |movie|
+      movie.title = new_title
+      movie.save
+    end
   end
 end

@@ -15,17 +15,17 @@ There are different ways to solve this lab so feel free to experiment!
 
 First, run `bundle install` to install the dependencies from the Gemfile.
 
-Next, run `bundle exec rake -T`, which will list all of the rake tasks you have
+Next, run `bin/rake -T`, which will list all of the rake tasks you have
 available in this lab. These tasks come with the `sinatra-activerecord` gem.
 
-Start the lab by running `learn test` or keep reading for more instructions.
+Start the lab by running `bin/rspec` or keep reading for more instructions.
 
 ## Create Table
 
 Try using a Rake task to create your migration file:
 
 ```console
-$ bundle exec rake db:create_migration NAME=create_movies
+bin/rake db:create_migration NAME=create_movies
 ```
 
 Once you have a migration file, add columns like so:
@@ -41,17 +41,17 @@ Once you have a migration file, add columns like so:
 After your migration is ready, run both these commands:
 
 ```console
-$ bundle exec rake db:migrate
-$ bundle exec rake db:migrate RAKE_ENV=test
+bin/rake db:migrate
+bin/rake db:migrate RAKE_ENV=test
 ```
 
 This will migrate your development database as well as a test database so you
-will be able to run `learn test`.
+will be able to run `bin/rspec`.
 
 You can also run this command to generate some sample data:
 
 ```console
-$ bundle exec rake db:seed
+bin/rake db:seed
 ```
 
 This will run the code in the `db/seeds.rb` file in order to create some movies.
@@ -59,7 +59,7 @@ This will run the code in the `db/seeds.rb` file in order to create some movies.
 Then, if you want to try out your code in the console, run:
 
 ```console
-$ bundle exec rake console
+bin/rake console
 ```
 
 Use the console to explore various Active Record methods that you'll need in
@@ -67,7 +67,7 @@ order to pass the tests.
 
 ## Instructions
 
-Run `learn test` to see the tests. You'll be adding new methods to the `Movie`
+Run `bin/rspec` to see the tests. You'll be adding new methods to the `Movie`
 class in `app/models/movie.rb` that take advantage of Active Record's build-in
 functionality.
 
@@ -76,7 +76,7 @@ advantage of Active Record's built-in methods. For example, you might write a
 method `Movie.find_all_movies_by_year` that finds all the movies for a given
 year:
 
-```rb
+```ruby
 class Movie < ActiveRecord::Base
   def self.find_all_movies_by_year(year)
     Movie.where(year: year)
@@ -88,8 +88,7 @@ end
 returns a list of all items that match the criteria being passed as an argument.
 
 Each test will take us through performing a basic CRUD action using the database
-we just created. You'll need to refer to the [Active Record Query
-Interface][querying] documentation to find the best methods to use.
+we just created. You'll need to refer to the [Active Record Query][querying] documentation to find the best methods to use.
 
 **Note**: Pay attention to which methods are instance methods (`#`) and which
 are class methods (`.`).
